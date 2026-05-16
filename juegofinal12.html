@@ -247,7 +247,7 @@ body.is-mobile .m-close-shop { display: block; }
     </div>
     
     <div class="cr-hud"><div class="hlbl">CRÉDITOS</div><div class="cr-num" id="cr1">1000</div></div>
-    <div class="p-slots" id="pslots1"><div class="slot on" id="sl1a">1 · CUCHILLO</div><div class="slot" id="sl1b">2 · —</div><div class="slot" id="sl1c">3 · —</div><div class="slot" id="sl1d">4 · FLASH</div><div class="slot" id="sl1e">5 · HUMO</div><div class="slot" id="sl1f">6 · MINA</div></div>
+    <div class="p-slots" id="pslots1"><div class="slot on" id="sl1a">1 · CUCHILLO</div><div class="slot" id="sl1b">2 · —</div><div class="slot" id="sl1c">3 · —</div><div class="slot" id="sl1d">4 · FLASH</div><div class="slot" id="sl1e">5 · HUMO</div><div class="slot" id="sl1f">6 · MINA</div><div class="slot" id="sl1g">7 · CUCHI.ARR.</div></div>
     <div class="reload-ind" id="ri1">RECARGANDO...</div><div class="killfeed" id="kf1"></div><div class="interact-prompt" id="int1"></div><div class="hit-ind" id="hi1">✖</div><div class="dmg-vig" id="dv1"></div>
     <div class="round-banner"><div class="rb-main" id="rbm1"></div><div class="rb-sub" id="rbs1"></div><div class="rb-hint" id="rbh1"></div></div>
     <div class="round-tracker"><div class="rt-round" id="rtr1">RONDA 1</div><div class="rt-kills" id="rtk1"></div></div><div class="gp-ind" id="gpi1"></div>
@@ -279,7 +279,7 @@ body.is-mobile .m-close-shop { display: block; }
       <div class="hud-r"><div class="wep-name" id="wname2">CUCHILLO</div><div class="ammo-big" id="ammo2">∞</div><div class="ammo-small" id="ammosm2"></div></div>
     </div>
     <div class="cr-hud"><div class="hlbl">CRÉDITOS</div><div class="cr-num" id="cr2">1000</div></div>
-    <div class="p-slots"><div class="slot on" id="sl2a">1 · CUCHILLO</div><div class="slot" id="sl2b">2 · —</div><div class="slot" id="sl2c">3 · —</div><div class="slot" id="sl2d">4 · FLASH</div><div class="slot" id="sl2e">5 · HUMO</div><div class="slot" id="sl2f">6 · MINA</div></div>
+    <div class="p-slots"><div class="slot on" id="sl2a">1 · CUCHILLO</div><div class="slot" id="sl2b">2 · —</div><div class="slot" id="sl2c">3 · —</div><div class="slot" id="sl2d">4 · FLASH</div><div class="slot" id="sl2e">5 · HUMO</div><div class="slot" id="sl2f">6 · MINA</div><div class="slot" id="sl2g">7 · CUCHI.ARR.</div></div>
     <div class="reload-ind" id="ri2">RECARGANDO...</div><div class="killfeed" id="kf2"></div><div class="interact-prompt" id="int2"></div><div class="hit-ind" id="hi2">✖</div><div class="dmg-vig" id="dv2"></div>
     <div class="round-banner"><div class="rb-main" id="rbm2"></div><div class="rb-sub" id="rbs2"></div><div class="rb-hint" id="rbh2"></div></div>
     <div class="round-tracker"><div class="rt-round" id="rtr2">RONDA 1</div><div class="rt-kills" id="rtk2"></div></div><div class="gp-ind connected" id="gpi2">🎮 Sin mando</div>
@@ -428,7 +428,7 @@ const PH = 1.7, PR = 0.28, ER = 0.35, MAX_ROUNDS = 10;
 let locked = false;
 let gameActive = false;
 let splitActive = false;
-let BIND_P1 = { up: 'KeyW', down: 'KeyS', left: 'KeyA', right: 'KeyD', jump: 'Space', sprint: 'ShiftLeft', crouch: 'ControlLeft', reload: 'KeyR', w1: 'Digit1', w2: 'Digit2', w3: 'Digit3', w4: 'Digit4', w5: 'Digit5', w6: 'Digit6', shop: 'KeyB', shoot: 'Mouse0', aim: 'Mouse2', interact: 'KeyE', score: 'Tab', placeMine: 'KeyG' };
+let BIND_P1 = { up: 'KeyW', down: 'KeyS', left: 'KeyA', right: 'KeyD', jump: 'Space', sprint: 'ShiftLeft', crouch: 'ControlLeft', reload: 'KeyR', w1: 'Digit1', w2: 'Digit2', w3: 'Digit3', w4: 'Digit4', w5: 'Digit5', w6: 'Digit6', w7: 'Digit7', shop: 'KeyB', shoot: 'Mouse0', aim: 'Mouse2', interact: 'KeyE', score: 'Tab', placeMine: 'KeyG' };
  
 // Bindings de mando (índices estándar Xbox/PS) — preconfigurados, reasignables
 // Botones: A=0, B=1, X=2, Y=3, LB=4, RB=5, LT=6, RT=7, Back=8, Start=9, LS=10, RS=11, Up=12, Down=13, Left=14, Right=15
@@ -447,7 +447,8 @@ let BIND_GP = {
     w3: 15,          // D-pad Right (bazooka)
     w4: 13,          // D-pad Down  (flash)
     w5: 5,           // RB          (humo)
-    w6: 9            // Start       (mina)
+    w6: 9,           // Start       (mina)
+    w7: 11           // RS click    (cuchillo arrojadizo)
 };
 let GP_DEADZONE = 0.18;
 let GP_LOOK_X = 0.085;
@@ -549,7 +550,8 @@ const WDATA = {
   sniper:    { name: 'SNIPER',   type: 'ranged', dmgChest: 150, dmgHead: 300, dmgLegs: 80, firerate: 1500, range: 200, ammoKey: 'sniper', auto: false, spread: .0001 },
   bazooka:   { name: 'BAZOOKA',  type: 'rocket', firerate: 1800, range: 120, ammoKey: 'bazooka', auto: false, splashDmg: 180, splashRadius: 5.5, rocketSpeed: 42 },
   flashbang: { name: 'FLASHBANG', type: 'throwable', id: 'flashbang' },
-  smoke:     { name: 'HUMO', type: 'throwable', id: 'smoke' }
+  smoke:     { name: 'HUMO', type: 'throwable', id: 'smoke' },
+  tknife:    { name: 'CUCHI.ARR.', type: 'tknife', id: 'tknife' }
 };
 const MAX_AMMO = { pistol: 12, smg: 20, shotgun: 15, rifle: 30, sniper: 5, bazooka: 3 };
 const RELOAD_MS = { pistol: 1500, smg: 1800, shotgun: 2200, rifle: 2500, sniper: 3000, bazooka: 3500 };
@@ -566,6 +568,8 @@ const SHOP_DATA = [
   { id: 'flashbang', name: 'Flash', type: 'grenade', price: 500, stats: 'Ciega 1.5s' },
   { id: 'smoke', name: 'Humo', type: 'grenade', price: 500, stats: 'Bloquea visión 10s' },
   { id: 'mine', name: 'Mina', type: 'mine', price: 1000, stats: 'La pisas, explota\nÁrea 3.5m' },
+  { id: 'tknife', name: 'Cuchillos arroj. (x3)', type: 'tknife', price: 500, stats: '3 cuchillos\n1 disparo letal' },
+  { id: 'hypervision', name: 'Hipervisión', type: 'hypervision', price: 2000, stats: 'Ver a todos\na través de paredes\n2 minutos' },
   { id: 'energy', name: 'Energética', type: 'consumable', price: 500, stats: 'Doble Sprint' },
   { id: 'kangaroo', name: 'Canguro', type: 'jumpboost', price: 800, stats: 'Salto x2.0' }
 ];
@@ -785,6 +789,12 @@ function detonateExplosion(pos, splashDmg, splashRadius, attacker) {
         } catch(e){}
     }
     muzzleFlash(pos);
+    // Cofres en radio: se abren
+    for (let i = activeChests.length - 1; i >= 0; i--) {
+        const ch = activeChests[i];
+        const dx = ch.x - pos.x, dy = (ch.y + 0.3) - pos.y, dz = ch.z - pos.z;
+        if (dx*dx + dy*dy + dz*dz <= splashRadius*splashRadius) breakChest(ch, attacker);
+    }
     // Daño a enemigos
     for (let e of enemies) {
         if (e.dead) continue;
@@ -921,7 +931,97 @@ function updateRockets(dt) {
     }
 }
 
-function detonateFlashbang(pos) {
+function spawnThrownKnife(pos, dir, owner) {
+    // Cuchillo arrojadizo: 1 disparo letal contra cualquier objetivo (jugadores y bots).
+    const geo = new THREE.BoxGeometry(0.025, 0.01, 0.32);
+    const mat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 1.0, roughness: 0.2 });
+    const m = new THREE.Mesh(geo, mat);
+    m.position.copy(pos);
+    const lookAt = pos.clone().add(dir);
+    m.lookAt(lookAt);
+    scene.add(m);
+    const speed = 38;
+    activeThrownKnives.push({
+        mesh: m,
+        vx: dir.x * speed, vy: dir.y * speed, vz: dir.z * speed,
+        life: 3.5, owner
+    });
+}
+let activeThrownKnives = [];
+function updateThrownKnives(dt) {
+    for (let i = activeThrownKnives.length - 1; i >= 0; i--) {
+        const k = activeThrownKnives[i];
+        k.life -= dt;
+        const prevPos = k.mesh.position.clone();
+        // Gravedad muy ligera para que vaya casi recto
+        k.vy -= 4.0 * dt;
+        k.mesh.position.x += k.vx * dt;
+        k.mesh.position.y += k.vy * dt;
+        k.mesh.position.z += k.vz * dt;
+        // Orientar el cuchillo en su dirección de vuelo
+        const flightDir = new THREE.Vector3(k.vx, k.vy, k.vz).normalize();
+        const lookTarget = k.mesh.position.clone().add(flightDir);
+        k.mesh.lookAt(lookTarget);
+        // Comprobación de colisión por raycast desde prev a actual
+        const seg = new THREE.Vector3().subVectors(k.mesh.position, prevPos);
+        const segLen = seg.length();
+        let hitTarget = null;
+        let hitWasMap = false;
+        if (segLen > 0.001) {
+            seg.normalize();
+            // 1) Comprobar enemigos / jugadores en ese segmento (esférico, prioritario)
+            for (let e of enemies) {
+                if (e.dead) continue;
+                const dx = e.x - k.mesh.position.x, dy = (e.y + 1) - k.mesh.position.y, dz = e.z - k.mesh.position.z;
+                if (dx*dx + dy*dy + dz*dz < 0.6*0.6) { hitTarget = { kind: 'enemy', ref: e }; break; }
+            }
+            if (!hitTarget && splitActive) {
+                [P1, P2].forEach(pp => {
+                    if (hitTarget || !pp || pp.dead || pp === k.owner) return;
+                    const dx = pp.cam.position.x - k.mesh.position.x, dy = (pp.cam.position.y - 0.8) - k.mesh.position.y, dz = pp.cam.position.z - k.mesh.position.z;
+                    if (dx*dx + dy*dy + dz*dz < 0.55*0.55) hitTarget = { kind: 'player', ref: pp };
+                });
+            }
+            // 2) Mapa
+            if (!hitTarget) {
+                physRc.far = segLen + 0.2;
+                physRc.set(prevPos, seg);
+                const hits = physRc.intersectObjects(mapMeshes, false);
+                if (hits.length > 0) {
+                    // Si es cofre, lo abrimos y el cuchillo se queda clavado (consumido).
+                    const obj = hits[0].object;
+                    if (obj && obj._chestRef && !obj._chestRef.broken) {
+                        breakChest(obj._chestRef, k.owner);
+                    }
+                    hitWasMap = true;
+                }
+            }
+        }
+        if (hitTarget) {
+            if (hitTarget.kind === 'enemy') {
+                const e = hitTarget.ref;
+                spawnParticles(e.getTorsoPos(), 'blood', 18, 3, 0.4);
+                e.takeDamage(e.hp + 999); // letal de 1 disparo
+                if (k.owner) {
+                    enemies = enemies.filter(x => x.id !== e.id);
+                    enemiesKilled++; k.owner.stats.kills++;
+                    k.owner.credits += 100 + round * 50;
+                    kfeed(k.owner, `🗡 Cuchillazo letal! +${100 + round * 50}cr`);
+                    checkRE();
+                }
+            } else if (hitTarget.kind === 'player') {
+                spawnParticles(hitTarget.ref.cam.position, 'blood', 18, 3, 0.4);
+                kfeed(k.owner, `🗡 P${hitTarget.ref.idx + 1} ¡Cuchillazo letal!`);
+                dmgPlayer(hitTarget.ref, hitTarget.ref.hp + 999, k.owner);
+            }
+            scene.remove(k.mesh); activeThrownKnives.splice(i, 1); continue;
+        }
+        if (hitWasMap || k.life <= 0) {
+            scene.remove(k.mesh); activeThrownKnives.splice(i, 1);
+        }
+    }
+}
+
     let players = [P1]; if (splitActive) players.push(P2);
     for(let p of players) {
         if (p.dead) continue; let dist = p.cam.position.distanceTo(pos);
@@ -1034,9 +1134,28 @@ function makeP(idx, sx, sz, yaw) {
   
   if (idx === 0) composer1 = composer; else composer2 = composer;
 
+  // === Layers para splitscreen ===
+  // Layer (idx+1) = modelo del jugador (no visible para sí mismo, sí para el otro)
+  // Cada cámara mantiene layer 0 (default) + la layer del modelo del OTRO jugador.
+  model.traverse(c => c.layers.set(idx + 1));
+  // P1.cam: ve layer 0 + layer 2 (modelo de P2). P2.cam: ve layer 0 + layer 1 (modelo de P1).
+  cam.layers.enable(idx === 0 ? 2 : 1);
+  // Layer del halo de hipervisión propio: cada jugador tiene una capa única de halos
+  // - Halo P1 -> layer 3, Halo P2 -> layer 4, Halo bots/remotos -> layer 5
+  // La cámara con hipervisión activa habilita las layers AJENAS (no la propia).
+
+  // Halo de hipervisión: pilar luminoso visible a través de paredes (depthTest off).
+  // Está siempre en escena pero sólo en una layer especial; sólo se renderiza si la cámara la habilita.
+  const haloColor = idx === 0 ? 0x00aaff : 0xff4444;
+  const haloMat = new THREE.MeshBasicMaterial({ color: haloColor, transparent: true, opacity: 0.55, depthTest: false });
+  const halo = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 1.9, 10), haloMat);
+  halo.layers.set(idx === 0 ? 3 : 4);
+  halo.renderOrder = 999;
+  scene.add(halo);
+
   const p = {
-    idx, hp: 100, maxHp: 100, armor: 0, maxArmor: 0, credits: 1000, weapons: ['knife', null, null], throwables: { flashbang: 0, smoke: 0, mine: 0 }, slot: 0, ammo: { pistol: 12, smg: 20, shotgun: 15, rifle: 30, sniper: 5, bazooka: 3 }, reloading: false, reloadLeft: 0, lastShot: 0, stats: { kills: 0, deaths: 0, shots: 0, hits: 0, headshots: 0 },
-    yaw, pitch: 0, dead: false, shopOpen: false, cam, model, vmCam: null, vmGroup: null, vmCurrent: null, vy: 0, floorY: 0, isCrouching: false, isAiming: false, recoilPitch: 0, recoilYaw: 0, lastStepTime: 0, spawnProtect: 0.0, hasEnergy: false, hasKangaroo: false
+    idx, hp: 100, maxHp: 100, armor: 0, maxArmor: 0, credits: 1000, weapons: ['knife', null, null], throwables: { flashbang: 0, smoke: 0, mine: 0, tknife: 0 }, slot: 0, ammo: { pistol: 12, smg: 20, shotgun: 15, rifle: 30, sniper: 5, bazooka: 3 }, reloading: false, reloadLeft: 0, lastShot: 0, stats: { kills: 0, deaths: 0, shots: 0, hits: 0, headshots: 0 },
+    yaw, pitch: 0, dead: false, shopOpen: false, cam, model, halo, vmCam: null, vmGroup: null, vmCurrent: null, vy: 0, floorY: 0, isCrouching: false, isAiming: false, recoilPitch: 0, recoilYaw: 0, lastStepTime: 0, spawnProtect: 0.0, hasEnergy: false, hasKangaroo: false, hyperVision: 0
   };
   setupPlayerVM(p); setVM(p, 'knife'); return p;
 }
@@ -1044,6 +1163,10 @@ function makeP(idx, sx, sz, yaw) {
 const P1 = makeP(0, SPAWNS[0].x, SPAWNS[0].z, Math.PI * .15); 
 const P2 = makeP(1, SPAWNS[0].x, SPAWNS[0].z, Math.PI);
 let enemies = [], round = 1, enemiesTotal = 0, enemiesKilled = 0, spawnQueue = 0, spawnTimer = 0, roundActive = false, gameOver = false;
+// Cola de respawn de bots: cuando un bot muere, se añade un timer y reaparece tras X segundos.
+// Esto NO afecta al avance de rondas (que se basa en enemiesKilled vs enemiesTotal).
+let botRespawnQueue = []; // [{ at: timestamp_ms }]
+const BOT_RESPAWN_MS = 5000;
 
 let _eid = 0; 
 class Enemy {
@@ -1061,6 +1184,13 @@ class Enemy {
     const hpCv = document.createElement('canvas'); hpCv.width = 64; hpCv.height = 12; this._hpCtx = hpCv.getContext('2d'); this._hpTex = new THREE.CanvasTexture(hpCv);
     this.hpBarMat = new THREE.MeshBasicMaterial({ map: this._hpTex, transparent: true, depthWrite: false });
     this.hpBar = new THREE.Mesh(new THREE.PlaneGeometry(.85, .13), this.hpBarMat); this.hpBar.position.set(0, 2.15, 0); this.group.add(this.hpBar);
+    // Halo de hipervisión: visible a través de paredes solo cuando un jugador con hipervisión activa la layer 5
+    this.haloMat = new THREE.MeshBasicMaterial({ color: 0xff3300, transparent: true, opacity: 0.6, depthTest: false });
+    this.halo = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 1.9, 10), this.haloMat);
+    this.halo.position.set(0, 1.0, 0);
+    this.halo.layers.set(5);
+    this.halo.renderOrder = 999;
+    this.group.add(this.halo);
     this._drawHP(); this.group.position.set(this.x, this.y, this.z); scene.add(this.group);
   }
   
@@ -1098,6 +1228,7 @@ class Enemy {
   takeDamage(dmg) { if (this.dead) return false; this.hp -= dmg; this.hitFlash = 8; this._drawHP(); if (this.hp <= 0) { this.die(); return true; } return false; }
   die() {
     this.dead = true; if (this.mixer) { this.mixer.stopAllAction(); }
+    if (this.halo) this.halo.visible = false;
     let fallFrames = 0; const fallInterval = setInterval(() => { this.group.rotation.x -= 0.1; this.group.position.y -= 0.05; fallFrames++; if (fallFrames > 15) { clearInterval(fallInterval); } }, 30);
     dropWeapon(this.x, this.y + .2, this.z, this.wepId, WDATA[this.wepId] ? MAX_AMMO[WDATA[this.wepId].ammoKey] : 10);
     setTimeout(() => { 
@@ -1105,6 +1236,8 @@ class Enemy {
         this._hpTex.dispose(); 
         this.hpBarMat.dispose(); 
     }, 3000);
+    // Encolar respawn de bot (sólo en partida local PVE).
+    if (!isMultiplayer) botRespawnQueue.push({ at: performance.now() + BOT_RESPAWN_MS });
   }
   getHeadPos() { return new THREE.Vector3(this.x, this.y + 1.6, this.z); } getTorsoPos() { return new THREE.Vector3(this.x, this.y + 1.0, this.z); } getLegsPos() { return new THREE.Vector3(this.x, this.y + .3, this.z); }
 }
@@ -1116,6 +1249,112 @@ function dropWeapon(x, y, z, wepId, ammo) {
 }
 
 function spawnE() { const s = SPAWNS[Math.floor(Math.random() * SPAWNS.length)]; enemies.push(new Enemy(s.x, s.y !== undefined ? s.y : 10, s.z, round)); spawnQueue--; }
+
+// === COFRES ===
+// Cofres distribuidos por el mapa. Al dispararle se abren y otorgan 500cr.
+// Reaparecen tras CHEST_RESPAWN_MS en su misma posición original.
+let activeChests = [];          // [{ mesh, x, y, z, broken: bool }]
+let chestRespawnQueue = [];     // [{ x, y, z, at: ms }]
+const CHEST_VALUE = 500;
+const CHEST_RESPAWN_MS = 15000;
+
+function buildChestMesh() {
+    const grp = new THREE.Group();
+    const wood = new THREE.MeshStandardMaterial({ color: 0x6a3f17, roughness: 0.85, metalness: 0.05 });
+    const iron = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.6, metalness: 0.7 });
+    const glow = new THREE.MeshBasicMaterial({ color: 0xffd84a });
+    const base = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.34, 0.4), wood);
+    base.position.y = 0.17; grp.add(base);
+    const lid = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.18, 0.4), wood);
+    lid.position.y = 0.43; grp.add(lid);
+    for (let zi of [-0.18, 0.18]) {
+        const band = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.08, 0.04), iron);
+        band.position.set(0, 0.28, zi); grp.add(band);
+    }
+    const lock = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.04), glow);
+    lock.position.set(0, 0.34, 0.21); grp.add(lock);
+    return grp;
+}
+
+function spawnChestAt(x, y, z) {
+    const m = buildChestMesh();
+    m.position.set(x, y, z);
+    if (!isMobile) m.traverse(c => { if (c.isMesh) c.castShadow = true; });
+    scene.add(m);
+    const chest = { mesh: m, x, y, z, broken: false };
+    activeChests.push(chest);
+    // Marcar las piezas para que las balas (raycasts contra mapMeshes) las detecten como cofres.
+    m.children.forEach(child => {
+        child._chestRef = chest;
+        mapMeshes.push(child);
+    });
+    return chest;
+}
+
+function spawnInitialChests(count) {
+    if (!SPAWNS || SPAWNS.length === 0) return;
+    const used = new Set();
+    let placed = 0, tries = 0;
+    while (placed < count && tries < count * 8) {
+        tries++;
+        const idx = Math.floor(Math.random() * SPAWNS.length);
+        if (used.has(idx)) continue;
+        used.add(idx);
+        const s = SPAWNS[idx];
+        spawnChestAt(s.x, s.y + 0.01, s.z);
+        placed++;
+    }
+}
+
+function breakChest(chest, attacker) {
+    if (chest.broken) return;
+    chest.broken = true;
+    mapMeshes = mapMeshes.filter(m => m._chestRef !== chest);
+    const pos = new THREE.Vector3(chest.x, chest.y + 0.3, chest.z);
+    spawnParticles(pos, 0xffaa00, 14, 5, 0.5);
+    spawnParticles(pos, 'smoke', 6, 2, 0.9);
+    spawnParticles(pos, 0xd9b15c, 10, 3, 0.6);
+    if (audioReady) {
+        try {
+            const now = Tone.now();
+            audioSys.gunNoise.triggerAttackRelease('16n', now);
+            audioSys.mechSynth.triggerAttackRelease('16n', now + 0.05);
+        } catch(e) {}
+    }
+    scene.remove(chest.mesh);
+    activeChests = activeChests.filter(c => c !== chest);
+    chestRespawnQueue.push({ x: chest.x, y: chest.y, z: chest.z, at: performance.now() + CHEST_RESPAWN_MS });
+    if (attacker && typeof attacker.credits === 'number') {
+        attacker.credits += CHEST_VALUE;
+        kfeed(attacker, `📦 ¡Cofre abierto! +${CHEST_VALUE}cr`);
+    }
+}
+
+function updateChests(dt) {
+    if (gameOver) return;
+    const now = performance.now();
+    for (let i = chestRespawnQueue.length - 1; i >= 0; i--) {
+        if (chestRespawnQueue[i].at <= now) {
+            const c = chestRespawnQueue[i];
+            chestRespawnQueue.splice(i, 1);
+            spawnChestAt(c.x, c.y, c.z);
+        }
+    }
+}
+
+// Procesa la cola de respawn de bots: por cada timer cumplido, encola un nuevo spawn.
+// El conteo de enemiesTotal aumenta en paralelo para que checkRE() no marque la ronda como completada.
+function processBotRespawns() {
+    if (isMultiplayer || gameOver || !roundActive) return;
+    const now = performance.now();
+    for (let i = botRespawnQueue.length - 1; i >= 0; i--) {
+        if (botRespawnQueue[i].at <= now) {
+            botRespawnQueue.splice(i, 1);
+            spawnQueue++;
+            enemiesTotal++; // ampliamos el cupo de la ronda en consecuencia
+        }
+    }
+}
 
 function startRound(r) {
   round = r; enemiesKilled = 0; enemiesTotal = 5 + Math.floor(r*1.5); spawnQueue = enemiesTotal; spawnTimer = 0; roundActive = true; 
@@ -1167,6 +1406,7 @@ function curW(p) {
     else if (p.slot === 3) { return p.throwables.flashbang > 0 ? { ...WDATA['flashbang'] } : null; } 
     else if (p.slot === 4) { return p.throwables.smoke > 0 ? { ...WDATA['smoke'] } : null; }
     else if (p.slot === 5) { return p.throwables.mine > 0 ? { name: 'MINA', type: 'mine', id: 'mine' } : null; }
+    else if (p.slot === 6) { return (p.throwables.tknife || 0) > 0 ? { name: 'CUCHI.ARR.', type: 'tknife', id: 'tknife', firerate: 600, range: 35 } : null; }
     return null;
 }
 
@@ -1186,6 +1426,19 @@ function tryShoot(p) {
       placeMine(p);
       p.throwables.mine--;
       if (p.throwables.mine <= 0) switchWep(p, p.weapons[1] ? 1 : 0);
+      return;
+  }
+  if (w.type === 'tknife') {
+      if (now - p.lastShot < (w.firerate || 600)) return; p.lastShot = now;
+      if ((p.throwables.tknife || 0) <= 0) return;
+      p.stats.shots++;
+      const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(p.cam.quaternion);
+      const startPos = p.cam.position.clone().add(forward.clone().multiplyScalar(0.5));
+      spawnThrownKnife(startPos, forward, p);
+      p.throwables.tknife--;
+      playGunSound('knife');
+      const xh = document.getElementById('xh' + (p.idx + 1)); xh.classList.add('firing'); setTimeout(() => xh.classList.remove('firing'), 120);
+      if ((p.throwables.tknife || 0) <= 0) switchWep(p, p.weapons[1] ? 1 : 0);
       return;
   }
   if (w.type === 'rocket') {
@@ -1234,8 +1487,25 @@ function doRay(p, w, spread) {
   
   let wallDist = w.range; const intersects = shootRc.intersectObjects(mapMeshes, false);
   if(intersects.length > 0) {
-      wallDist = intersects[0].distance; if (intersects[0].face) { spawnDecal(intersects[0].point, intersects[0].face.normal, intersects[0].object); }
-      spawnParticles(intersects[0].point, 0xffaa00, 5, 2, 0.3);
+      wallDist = intersects[0].distance;
+      const hitObj = intersects[0].object;
+      // Si el primer impacto es un cofre, lo abrimos y NO bloqueamos la trayectoria al objetivo.
+      if (hitObj && hitObj._chestRef && !hitObj._chestRef.broken) {
+          breakChest(hitObj._chestRef, p);
+          // Recalculamos pared real ignorando el cofre (busca el siguiente impacto que no sea cofre)
+          let nextWall = null;
+          for (let h of intersects) { if (!h.object || !h.object._chestRef) { nextWall = h; break; } }
+          if (nextWall) {
+              wallDist = nextWall.distance;
+              if (nextWall.face) spawnDecal(nextWall.point, nextWall.face.normal, nextWall.object);
+              spawnParticles(nextWall.point, 0xffaa00, 5, 2, 0.3);
+          } else {
+              wallDist = w.range;
+          }
+      } else {
+          if (intersects[0].face) { spawnDecal(intersects[0].point, intersects[0].face.normal, intersects[0].object); }
+          spawnParticles(intersects[0].point, 0xffaa00, 5, 2, 0.3);
+      }
   } else {
       for (let t = .5; t < w.range; t += .5) { const tx = ro.x + rd.x * t; const tz = ro.z + rd.z * t; if (Math.abs(tx) > 500 || Math.abs(tz) > 500) { wallDist = t; break; } }
   }
@@ -1324,11 +1594,11 @@ function meleeHit(p, w) {
 
 function startReload(p) { const w = curW(p); if (!w || w.type === 'melee' || w.type === 'throwable' || p.reloading) return; if (p.ammo[w.ammoKey] >= MAX_AMMO[w.ammoKey]) return; p.reloading = true; p.reloadLeft = RELOAD_MS[w.ammoKey] || 1500; document.getElementById('ri' + (p.idx + 1)).style.display = 'block'; playReloadSound(p.reloadLeft); }
 function switchWep(p, s) { 
-    if (s === 1 && !p.weapons[1]) return; if (s === 2 && !p.weapons[2]) return; if (s === 3 && p.throwables.flashbang <= 0) return; if (s === 4 && p.throwables.smoke <= 0) return; if (s === 5 && p.throwables.mine <= 0) return;
+    if (s === 1 && !p.weapons[1]) return; if (s === 2 && !p.weapons[2]) return; if (s === 3 && p.throwables.flashbang <= 0) return; if (s === 4 && p.throwables.smoke <= 0) return; if (s === 5 && p.throwables.mine <= 0) return; if (s === 6 && (p.throwables.tknife || 0) <= 0) return;
     if (p.slot === s) return; p.slot = s; 
     if (p.reloading) { p.reloading = false; document.getElementById('ri' + (p.idx + 1)).style.display = 'none'; } 
-    let idParaVM = 'knife'; if (s === 0) idParaVM = 'knife'; if (s === 1) idParaVM = p.weapons[1]; if (s === 2) idParaVM = p.weapons[2]; if (s === 3 || s === 4 || s === 5) idParaVM = 'knife';
-    setVM(p, idParaVM); if (s === 3 || s === 4 || s === 5) { p.vmGroup.visible = false; } else { p.vmGroup.visible = true; }
+    let idParaVM = 'knife'; if (s === 0) idParaVM = 'knife'; if (s === 1) idParaVM = p.weapons[1]; if (s === 2) idParaVM = p.weapons[2]; if (s === 3 || s === 4 || s === 5 || s === 6) idParaVM = 'knife';
+    setVM(p, idParaVM); if (s === 3 || s === 4 || s === 5 || s === 6) { p.vmGroup.visible = false; } else { p.vmGroup.visible = true; }
 }
 
 function muzzleFlash(pos) { muzzleLight.position.copy(pos); muzzleLight.intensity = 3.5; setTimeout(() => muzzleLight.intensity = 0, 55); }
@@ -1464,6 +1734,7 @@ function buildShop(p) {
     else if (item.type === 'jumpboost') owned = !!p.hasKangaroo;
     else if (item.type === 'consumable' && item.id === 'energy') owned = !!p.hasEnergy;
     else if (item.type === 'armor') owned = (p.maxArmor >= (item.bonus || 0) && p.armor >= (item.bonus || 0));
+    else if (item.type === 'hypervision') owned = (p.hyperVision || 0) > 0;
     const poor = p.credits < item.price;
     if (owned) { div.classList.add('owned'); } else if (poor) { div.classList.add('poor'); }
     div.innerHTML = `<div class="si-name">${item.name}</div><div class="si-stat">${item.stats}</div><div class="si-price">💰 ${item.price}cr${owned ? ' ✓' : ''}</div>`;
@@ -1492,6 +1763,8 @@ function buyItem(p, item) {
     } 
     else if (item.type === 'grenade') { p.throwables[item.id]++; kfeed(p, `💣 ${item.name} en inventario`); } 
     else if (item.type === 'mine') { p.throwables.mine = (p.throwables.mine || 0) + 1; kfeed(p, `💣 Mina en inventario`); }
+    else if (item.type === 'tknife') { p.throwables.tknife = (p.throwables.tknife || 0) + 3; kfeed(p, `🗡 Cuchillos arrojadizos +3`); }
+    else if (item.type === 'hypervision') { p.hyperVision = 120.0; kfeed(p, `👁 Hipervisión activa: 2 minutos`); }
     else if (item.type === 'consumable') { p.hasEnergy = true; document.getElementById('nrg' + (p.idx+1)).style.opacity = 1; kfeed(p, `⚡ Energía Bebida: ¡Sprint Mejorado!`); }
     else if (item.type === 'jumpboost') { p.hasKangaroo = true; kfeed(p, `🦘 Canguro: salto x2.0`); }
     buildShop(p); 
@@ -1550,8 +1823,12 @@ function updateP(p, dt, mx, mz, dyaw, dpitch, isSprinting, jumpPulse) {
   for (let rw of droppedWeapons) {
       if (rw.active && Math.abs(rw.x - p.cam.position.x) < 1.5 && Math.abs(rw.z - p.cam.position.z) < 1.5 && Math.abs(rw.y - (p.cam.position.y - pHeight)) < 1.5) {
           intUI.textContent = `Recoger ${WDATA[rw.wepId].name}`; intUI.style.display = 'block';
-          const interactPressed = p.idx === 0 ? keys[BIND_P1.interact] : false;
-          if (interactPressed) { rw.active = false; scene.remove(rw.mesh); p.weapons[1] = rw.wepId; p.ammo[WDATA[rw.wepId].ammoKey] += rw.ammo; switchWep(p, 1); kfeed(p, `🔫 Recogido: ${WDATA[rw.wepId].name}`); }
+          // J1: tecla configurada (BIND_P1.interact). J2: pulso del mando (gpInteractPulse) generado en pollGamepadP2.
+          const interactPressed = p.idx === 0 ? !!keys[BIND_P1.interact] : !!p._gpInteractPulse;
+          if (interactPressed) {
+              if (p.idx === 1) p._gpInteractPulse = false;
+              rw.active = false; scene.remove(rw.mesh); p.weapons[1] = rw.wepId; p.ammo[WDATA[rw.wepId].ammoKey] += rw.ammo; switchWep(p, 1); kfeed(p, `🔫 Recogido: ${WDATA[rw.wepId].name}`);
+          }
       }
   }
 }
@@ -1654,7 +1931,7 @@ document.addEventListener('keydown', e => {
   }
   
   if (P1.shopOpen) return;
-  if (e.code === BIND_P1.shop && !isMobile) openShop(P1); if (e.code === BIND_P1.w1) switchWep(P1, 0); if (e.code === BIND_P1.w2) switchWep(P1, 1); if (e.code === BIND_P1.w3) switchWep(P1, 2); if (e.code === BIND_P1.w4) switchWep(P1, 3); if (e.code === BIND_P1.reload) startReload(P1);
+  if (e.code === BIND_P1.shop && !isMobile) openShop(P1); if (e.code === BIND_P1.w1) switchWep(P1, 0); if (e.code === BIND_P1.w2) switchWep(P1, 1); if (e.code === BIND_P1.w3) switchWep(P1, 2); if (e.code === BIND_P1.w4) switchWep(P1, 3); if (e.code === BIND_P1.w5) switchWep(P1, 4); if (e.code === BIND_P1.w6) switchWep(P1, 5); if (e.code === BIND_P1.w7) switchWep(P1, 6); if (e.code === BIND_P1.reload) startReload(P1);
 });
 document.addEventListener('keyup', e => { keys[e.code] = false; if (e.code === BIND_P1.crouch) P1.isCrouching = false; });
 document.addEventListener('mousemove', e => { if (!locked || P1.shopOpen || isMobile) return; const s = P1.isAiming ? 0.0009 : 0.0018; P1.yaw -= e.movementX * s; P1.pitch -= e.movementY * s; P1.pitch = Math.max(-Math.PI * .44, Math.min(Math.PI * .44, P1.pitch)); });
@@ -1678,6 +1955,7 @@ const KB_LABELS = [
     { key: 'placeMine', label: 'Colocar Mina' },
     { key: 'w1', label: 'Slot 1 · Cuchillo' }, { key: 'w2', label: 'Slot 2 · Arma 1' }, { key: 'w3', label: 'Slot 3 · Bazooka' },
     { key: 'w4', label: 'Slot 4 · Flash' }, { key: 'w5', label: 'Slot 5 · Humo' }, { key: 'w6', label: 'Slot 6 · Mina' },
+    { key: 'w7', label: 'Slot 7 · Cuchi.Arr.' },
 ];
 const GP_LABELS = [
     { key: 'shoot', label: 'Disparar' }, { key: 'aim', label: 'Apuntar' },
@@ -1687,6 +1965,7 @@ const GP_LABELS = [
     { key: 'placeMine', label: 'Colocar Mina' },
     { key: 'w1', label: 'Slot 1 · Cuchillo' }, { key: 'w2', label: 'Slot 2 · Arma 1' }, { key: 'w3', label: 'Slot 3 · Bazooka' },
     { key: 'w4', label: 'Slot 4 · Flash' }, { key: 'w5', label: 'Slot 5 · Humo' }, { key: 'w6', label: 'Slot 6 · Mina' },
+    { key: 'w7', label: 'Slot 7 · Cuchi.Arr.' },
 ];
 // Nombres legibles para botones estándar de mando
 const GP_BUTTON_NAMES = ['A','B','X','Y','LB','RB','LT','RT','Back','Start','LS','RS','D-Up','D-Down','D-Left','D-Right','Home'];
@@ -1910,6 +2189,7 @@ function updateHUD(p) {
       if (w.type === 'ranged' || w.type === 'rocket') { ammoDisp = p.ammo[w.ammoKey]; ammoSm = '/ ' + MAX_AMMO[w.ammoKey]; }
       else if (w.type === 'throwable') { ammoDisp = p.throwables[w.id]; }
       else if (w.type === 'mine') { ammoDisp = p.throwables.mine; }
+      else if (w.type === 'tknife') { ammoDisp = p.throwables.tknife || 0; }
   }
   document.getElementById('ammo' + n).textContent = ammoDisp;
   document.getElementById('ammosm' + n).textContent = ammoSm;
@@ -1921,6 +2201,7 @@ function updateHUD(p) {
       const d = document.getElementById('sl' + n + 'd'); d.className = 'slot' + (p.slot === 3 ? ' on' : '') + (p.throwables.flashbang > 0 ? '' : ' empty');
       const e = document.getElementById('sl' + n + 'e'); e.className = 'slot' + (p.slot === 4 ? ' on' : '') + (p.throwables.smoke > 0 ? '' : ' empty');
       const f = document.getElementById('sl' + n + 'f'); if (f) f.className = 'slot' + (p.slot === 5 ? ' on' : '') + (p.throwables.mine > 0 ? '' : ' empty');
+      const g = document.getElementById('sl' + n + 'g'); if (g) g.className = 'slot' + (p.slot === 6 ? ' on' : '') + ((p.throwables.tknife || 0) > 0 ? '' : ' empty');
   }
 }
 
@@ -1988,12 +2269,25 @@ function resetMatchState() {
     spawnQueue = 0;
     spawnTimer = 0;
     roundActive = false;
+    botRespawnQueue = [];
+    // Re-inicializar cofres: limpiar los actuales y los que estén pendientes de respawn,
+    // y volver a spawnear los iniciales en sus posiciones de SPAWNS.
+    activeChests.forEach(c => { 
+        try { 
+            mapMeshes = mapMeshes.filter(m => m._chestRef !== c);
+            scene.remove(c.mesh); 
+        } catch(e){} 
+    });
+    activeChests = [];
+    chestRespawnQueue = [];
+    if (SPAWNS && SPAWNS.length > 0 && mapLoaded) spawnInitialChests(10);
     // Estado de jugadores
     [P1, P2].forEach(p => {
         if (!p) return;
         p.hp = p.maxHp; p.armor = 0; p.maxArmor = 0;
         p.dead = false; p.shopOpen = false;
         p.spawnProtect = 0; p.hasEnergy = false;
+        p.hyperVision = 0;
         p.recoilPitch = 0; p.recoilYaw = 0;
         p._lastHitProcessed = Date.now();
         p._processedHits = new Set();
@@ -2111,8 +2405,12 @@ function joinRoom(rId) {
                         // Color unico por uid (antes todos eran rojos identicos)
                         const col = colorFromUid(dSnap.id);
                         const m = createPlayerModel(col.getHex()); scene.add(m);
+                        // Halo de hipervisión para jugadores remotos (layer 5)
+                        const haloMat = new THREE.MeshBasicMaterial({ color: col.getHex(), transparent: true, opacity: 0.6, depthTest: false });
+                        const halo = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 1.9, 10), haloMat);
+                        halo.layers.set(5); halo.renderOrder = 999; scene.add(halo);
                         remotePlayersMap.set(dSnap.id, {
-                            mesh: m, uid: dSnap.id,
+                            mesh: m, halo, uid: dSnap.id,
                             targetX: pd.x || 0, targetY: pd.y || 0, targetZ: pd.z || 0,
                             targetYaw: pd.yaw || 0, hp: pd.hp != null ? pd.hp : 100,
                             floorY: pd.floorY != null ? pd.floorY : 0,
@@ -2142,6 +2440,7 @@ function joinRoom(rId) {
                     const rp = remotePlayersMap.get(dSnap.id);
                     if (rp) {
                         if (rp.mesh) scene.remove(rp.mesh);
+                        if (rp.halo) scene.remove(rp.halo);
                         remotePlayersMap.delete(dSnap.id);
                     }
                 }
@@ -2178,6 +2477,7 @@ function joinRoom(rId) {
         remotePlayersMap.forEach((rp, uid) => {
             if (localNow - rp.lastSeen > 4000) {
                 if (rp.mesh) scene.remove(rp.mesh);
+                if (rp.halo) scene.remove(rp.halo);
                 remotePlayersMap.delete(uid);
             }
         });
@@ -2311,6 +2611,8 @@ function checkReady() {
             const s = SPAWNS[Math.floor(Math.random() * SPAWNS.length)]; const mk = new THREE.Mesh(new THREE.BoxGeometry(.5, .5, .5), mMedkit);
             mk.position.set(s.x, s.y + 0.25, s.z); mk.castShadow = !isMobile; scene.add(mk); medkits.push({ x: s.x, y: s.y + 0.25, z: s.z, mesh: mk, active: true });
         }
+        // Spawnear cofres iniciales en el mapa (10 lugares fijos: respawnean en su sitio)
+        spawnInitialChests(10);
         P1.dead = true; respawnPlayer(P1); P2.dead = true; respawnPlayer(P2);
     }
 }
@@ -2390,10 +2692,14 @@ function loop(ts) {
                 rp.mesh.position.lerp(new THREE.Vector3(rp.targetX, baseY, rp.targetZ), 0.3);
                 rp.mesh.scale.y = rp.isCrouching ? 0.6 : 1.0;
                 rp.mesh.rotation.y += normA(rp.targetYaw - rp.mesh.rotation.y) * 0.3;
+                if (rp.halo) rp.halo.position.set(rp.targetX, baseY + 1.0, rp.targetZ);
+            } else if (rp.halo) {
+                rp.halo.visible = rp.hp > 0;
             }
         });
     } else {
         if (roundActive && spawnQueue > 0) { spawnTimer += dt; if (spawnTimer >= Math.max(.7, 2.8 - round * .18)) { spawnTimer = 0; spawnE(); } }
+        processBotRespawns();
         const p1pos = P1.dead ? null : P1.cam.position; const p2pos = splitActive && !P2.dead ? P2.cam.position : null;
         for (const e of enemies) e.update(dt, p1pos, p2pos); separateEnemies();
         for (const e of enemies) { if (e.dead) continue; e.shootTimer = (e.shootTimer || 0) + dt; if (e.shootTimer >= WDATA[e.wepId].firerate / 1000 * 2.2 && e.state === 'chase') { e.shootTimer = 0; enemyShoot(e); } }
@@ -2402,10 +2708,52 @@ function loop(ts) {
     updateVFX(dt);
     updateRockets(dt);
     updateMines(dt);
+    updateThrownKnives(dt);
+    updateChests(dt);
+    // Decremento de Hipervisión por jugador (2 minutos máx).
+    [P1, P2].forEach(p => {
+        if (!p) return;
+        // Indicador HUD de hipervisión (creado on-demand)
+        const indId = 'hv' + (p.idx + 1);
+        let indEl = document.getElementById(indId);
+        if (!indEl) {
+            const vp = document.getElementById('viewport-p' + (p.idx + 1));
+            if (vp) {
+                indEl = document.createElement('div');
+                indEl.id = indId;
+                indEl.style.cssText = 'position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:11px;color:#0ff;background:rgba(0,0,0,.7);padding:3px 9px;border:1px solid #0ff;border-radius:3px;z-index:25;display:none;font-weight:bold;letter-spacing:1px;text-shadow:0 0 6px #0ff;margin-top:30px;';
+                vp.appendChild(indEl);
+            }
+        }
+        if (p.hyperVision > 0) {
+            p.hyperVision -= dt;
+            if (p.hyperVision <= 0) { p.hyperVision = 0; kfeed(p, '👁 Hipervisión expiró'); if (indEl) indEl.style.display = 'none'; }
+            else if (indEl) {
+                const secs = Math.ceil(p.hyperVision);
+                const mm = Math.floor(secs / 60), ss = secs % 60;
+                indEl.textContent = `👁 HIPERVISIÓN ${mm}:${ss.toString().padStart(2, '0')}`;
+                indEl.style.display = 'block';
+            }
+        } else if (indEl) {
+            indEl.style.display = 'none';
+        }
+    });
     for (let w of droppedWeapons) if (w.active) w.mesh.rotation.y += dt * 1.5;
   }
 
-  P1.model.visible = false; if (splitActive) P2.model.visible = !P2.dead;
+  // Visibilidad: ya no usamos visible=false; las layers se encargan de que cada
+  // jugador NO se vea a sí mismo pero sí vea al otro. Si está muerto sí lo ocultamos.
+  P1.model.visible = !P1.dead;
+  if (splitActive) P2.model.visible = !P2.dead;
+  // Posicionar halos de hipervisión sobre la cabeza de cada jugador
+  if (P1.halo) P1.halo.position.set(P1.cam.position.x, (P1.floorY || 0) + 1.0, P1.cam.position.z);
+  if (P2.halo) P2.halo.position.set(P2.cam.position.x, (P2.floorY || 0) + 1.0, P2.cam.position.z);
+  // Actualizar layers de cámara según hipervisión activa
+  // P1 con HV: ver halos de P2 (layer 4) y de bots/remotos (layer 5)
+  if (P1.hyperVision > 0) { P1.cam.layers.enable(4); P1.cam.layers.enable(5); }
+  else { P1.cam.layers.disable(4); P1.cam.layers.disable(5); }
+  if (P2.hyperVision > 0) { P2.cam.layers.enable(3); P2.cam.layers.enable(5); }
+  else { P2.cam.layers.disable(3); P2.cam.layers.disable(5); }
   const vp1 = document.getElementById('viewport-p1'); chkR(r1, P1.cam, vp1, P1.vmCam, composer1); 
   
   if (composer1 && !isMobile) { composer1.render(); }
@@ -2452,7 +2800,7 @@ function leaveRoom() {
     currentRoomId = null; isMultiplayer = false; isHost = false; gameActive = false;
     
     // Limpiamos la partida remota local
-    remotePlayersMap.forEach(rp => { if(rp.mesh) scene.remove(rp.mesh); });
+    remotePlayersMap.forEach(rp => { if(rp.mesh) scene.remove(rp.mesh); if(rp.halo) scene.remove(rp.halo); });
     remotePlayersMap.clear();
 
     // Restauramos Interfaz
@@ -2491,6 +2839,62 @@ window.addEventListener('gamepaddisconnected', (e) => {
     const gpi2 = document.getElementById('gpi2'); if (gpi2) gpi2.textContent = '🎮 Sin mando';
 });
  
+// Asistencia de puntería para el J2 (mando). Si la mira está cerca de un objetivo
+// (bot vivo o J1 vivo) dentro de cono y rango, devuelve un dyaw/dpitch de corrección
+// suave que se suma a los inputs del stick. La fuerza aumenta si el jugador apunta.
+const _aaTmpV = new THREE.Vector3();
+const _aaTmpQ = new THREE.Quaternion();
+const _aaTmpForward = new THREE.Vector3();
+const _aaTmpToTarget = new THREE.Vector3();
+const _aaTmpEuler = new THREE.Euler();
+function computeAimAssist(p, isAimingHold) {
+    if (!p || p.dead) return null;
+    const camPos = p.cam.position;
+    // Forward actual de la cámara
+    _aaTmpForward.set(0, 0, -1).applyQuaternion(p.cam.quaternion).normalize();
+    // Cono más estrecho cuando se apunta (más preciso). Más amplio sin apuntar.
+    const coneCos = isAimingHold ? Math.cos(0.18) : Math.cos(0.11); // ~10°/6°
+    const maxRange = 60;
+    let bestTarget = null;
+    let bestDot = coneCos;
+    const candidates = [];
+    for (const e of enemies) if (!e.dead) candidates.push({ x: e.x, y: e.y + 1.0, z: e.z });
+    if (splitActive) {
+        const op = p.idx === 0 ? P2 : P1;
+        if (op && !op.dead) candidates.push({ x: op.cam.position.x, y: op.cam.position.y - 0.5, z: op.cam.position.z });
+    }
+    for (const c of candidates) {
+        const dx = c.x - camPos.x, dy = c.y - camPos.y, dz = c.z - camPos.z;
+        const distSq = dx*dx + dy*dy + dz*dz;
+        if (distSq > maxRange * maxRange) continue;
+        const dist = Math.sqrt(distSq);
+        const ndx = dx / dist, ndy = dy / dist, ndz = dz / dist;
+        const dot = ndx * _aaTmpForward.x + ndy * _aaTmpForward.y + ndz * _aaTmpForward.z;
+        if (dot < bestDot) continue;
+        // LOS para no fijar a través de paredes/humo
+        if (!hasLineOfSight(camPos.x, camPos.y, camPos.z, c.x, c.y, c.z)) continue;
+        bestDot = dot;
+        bestTarget = c;
+    }
+    if (!bestTarget) return null;
+    // Calcula yaw/pitch deseados hacia el objetivo
+    const dx = bestTarget.x - camPos.x, dy = bestTarget.y - camPos.y, dz = bestTarget.z - camPos.z;
+    const desiredYaw = Math.atan2(-dx, -dz);
+    const horiz = Math.sqrt(dx*dx + dz*dz) || 0.0001;
+    const desiredPitch = Math.atan2(dy, horiz);
+    // Diferencia normalizada
+    let dyawErr = normA(desiredYaw - p.yaw);
+    let dpitchErr = desiredPitch - p.pitch;
+    // Fuerza: más fuerte al apuntar; con rampa por proximidad (más fuerte cuanto más cerca de la mira).
+    // factor 1 cuando dot==1, decae a 0 cuando dot==coneCos.
+    const ramp = (bestDot - coneCos) / (1 - coneCos);
+    const baseStrength = isAimingHold ? 0.18 : 0.10;
+    const strength = baseStrength * Math.max(0, Math.min(1, ramp));
+    // updateP aplica `p.yaw -= dyaw` y `p.pitch -= dpitch`,
+    // por lo que para acercarse al objetivo necesitamos pasar -dyawErr y -dpitchErr.
+    return { dyaw: -dyawErr * strength, dpitch: -dpitchErr * strength };
+}
+
 // Gamepad polling para P1 (usado en singleplayer y splitscreen). 
 // Si splitActive, P1 sigue con teclado/ratón y P2 toma el primer mando.
 // Si NO splitActive, P1 puede usar el primer mando si está conectado.
@@ -2533,6 +2937,7 @@ function pollGamepadP1() {
     if (gpRising(gp, 'p1_w4', BIND_GP.w4)) switchWep(P1, 3);
     if (gpRising(gp, 'p1_w5', BIND_GP.w5)) switchWep(P1, 4);
     if (gpRising(gp, 'p1_w6', BIND_GP.w6)) switchWep(P1, 5);
+    if (gpRising(gp, 'p1_w7', BIND_GP.w7)) switchWep(P1, 6);
     if (gpRising(gp, 'p1_mine', BIND_GP.placeMine)) {
         // Acceso rápido a slot mina
         if ((P1.throwables.mine || 0) > 0) { switchWep(P1, 5); tryShoot(P1); }
@@ -2568,6 +2973,19 @@ function pollGamepadP2() {
     const aim = gpPressed(gp, BIND_GP.aim);
     const sprint = gpPressed(gp, BIND_GP.sprint);
     if (aim) { dyaw *= 0.45; dpitch *= 0.45; }
+
+    // === ASISTENCIA DE PUNTERÍA (Aim Assist) para J2 con mando ===
+    // Si la mira está cerca (en pantalla) de un objetivo válido (bot vivo o J1 vivo)
+    // dentro del rango/visibilidad, aplicamos una corrección suave hacia el centro
+    // de su torso. Más fuerte cuando se está apuntando con la cámara.
+    if (!P2.dead && !P2.shopOpen) {
+        const aa = computeAimAssist(P2, aim);
+        if (aa) {
+            // Sumamos la corrección al delta de cámara que aplicará updateP
+            dyaw += aa.dyaw;
+            dpitch += aa.dpitch;
+        }
+    }
  
     if (gpRising(gp, 'p2_jump', BIND_GP.jump)) P2._gpJumpPulse = true;
     if (gpRising(gp, 'p2_reload', BIND_GP.reload)) startReload(P2);
@@ -2579,7 +2997,10 @@ function pollGamepadP2() {
     if (gpRising(gp, 'p2_w4', BIND_GP.w4)) switchWep(P2, 3);
     if (gpRising(gp, 'p2_w5', BIND_GP.w5)) switchWep(P2, 4);
     if (gpRising(gp, 'p2_w6', BIND_GP.w6)) switchWep(P2, 5);
+    if (gpRising(gp, 'p2_w7', BIND_GP.w7)) switchWep(P2, 6);
     if (gpRising(gp, 'p2_mine', BIND_GP.placeMine)) { if ((P2.throwables.mine || 0) > 0) { switchWep(P2, 5); tryShoot(P2); } }
+    // Interactuar (recoger arma): genera un pulso que updateP consumirá este frame.
+    if (gpRising(gp, 'p2_interact', BIND_GP.interact)) { P2._gpInteractPulse = true; }
  
     return { connected:true, mx, mz, dyaw, dpitch, sprint, shoot, aim };
 }
